@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://b6xbkuumdbgmc"]
+
+[ext_resource type="Script" uid="uid://ctner1u3utn0d" path="res://main/main.gd" id="1_53q0u"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_l657f"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_4hihk"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[node name="Main" type="Node3D" unique_id=1199509407]
+script = ExtResource("1_53q0u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1334726914]
+transform = Transform3D(607.6481, 0, 0, 0, 607.6481, 0, 0, 0, 607.6481, 0, 0, 0)
+mesh = SubResource("PlaneMesh_l657f")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=1384033959]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=1812322420]
+shape = SubResource("ConcavePolygonShape3D_4hihk")
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1450176998]
+_spawnable_scenes = PackedStringArray("uid://d10dh4m7kg8qu")
+spawn_path = NodePath("../Players")
+
+[node name="Players" type="Node3D" parent="." unique_id=157444669]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1303172, 0)

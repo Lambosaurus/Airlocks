@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://d10dh4m7kg8qu"]
+
+[ext_resource type="Script" uid="uid://c0doombusc70q" path="res://actors/player.gd" id="1_niuxy"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_l657f"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l657f"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_cp522"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Head:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="Player" type="CharacterBody3D" unique_id=1862728620]
+script = ExtResource("1_niuxy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=516017047]
+mesh = SubResource("CapsuleMesh_l657f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=699210831]
+shape = SubResource("CapsuleShape3D_l657f")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=771575632]
+replication_config = SubResource("SceneReplicationConfig_cp522")
+
+[node name="Head" type="Node3D" parent="." unique_id=1467154836]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6549567, 0)
+
+[node name="HeadCam" type="Camera3D" parent="Head" unique_id=372969406]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Head" unique_id=93720931]
