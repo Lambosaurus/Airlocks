@@ -9,6 +9,10 @@ func _ready():
 		
 		add_player(1)
 		
+func _process(delta):
+	if Input.is_key_pressed(KEY_ESCAPE):
+		get_tree().quit()
+		
 func add_player(id: int): 
 	var p = PLAYER_SCENE.instantiate()
 	p.name = str(id) # Name node by peer ID for easy tracking
