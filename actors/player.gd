@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var force = 2.0
+@export var force = 1.0
 		
 const INPUT_MAP: Dictionary[String, Vector3] = {
 	"left": Vector3.LEFT,
@@ -17,17 +17,41 @@ const INPUT_MAP: Dictionary[String, Vector3] = {
 
 @export var gravity = 1
 
+@onready var pointer = $Head/Pointer
+
 func is_current_player():
 	return $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id()
 
 func _process(delta):
 	if is_current_player():
 		handle_light_toggle()
+		handle_input()
 	
 func _physics_process(delta):
 	if is_current_player():
 		process_movement()
 		move_and_slide()
+		
+func handle_input():
+	if Input.is_action_just_pressed("action_primary"):
+		if $BodySlots/LeftHand.is_assigned():
+			var ball = $BodySlots/LeftHand.take_from_slot()
+			if ball: 
+				add_sibling(ball) # We just make assumptions like this. How do we handle changing of spaces
+				ball.apply_impulse(pointer.current_global_direction * 5.0)
+		elif pointer.current_collider and pointer.current_collider is Ball:
+			$BodySlots/LeftHand.add_to_slot(pointer.current_collider)
+			
+	if Input.is_action_just_pressed("camera_toggle"):
+		if $Head/HeadCam.current:
+			$ThirdPersonCamera.current = true
+		else: $Head/HeadCam.current = true
+		
+	if Input.is_action_just_pressed("detach_cursor"):
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func get_motion_input():
 	var direction = Vector3.ZERO
@@ -65,10 +89,11 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if not is_current_player(): return
 	# Check if the mouse is moving
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		# Rotate horizontally (Y-axis)
 		rotate_y(-event.relative.x * camera_mouse_sensitivity)
 		
 		# Rotate vertically (X-axis) and clamp it so the camera doesn't flip
 		camera.rotate_x(-event.relative.y * camera_mouse_sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, camera_min_pitch, camera_max_pitch)
+		

@@ -16,7 +16,7 @@ func _process(delta):
 func add_player(id: int): 
 	var p = PLAYER_SCENE.instantiate()
 	p.name = str(id) # Name node by peer ID for easy tracking
-	$Players.add_child(p)
+	$EntitySpace.add_child(p)
 	
 func remove_player(id: int):
 	var player = get_node_or_null(str(id))
