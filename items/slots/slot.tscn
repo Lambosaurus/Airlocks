@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://disgnpqrbrrfj"]
+
+[ext_resource type="Script" uid="uid://n4ugve454jty" path="res://items/slots/slot.gd" id="1_hdrrs"]
+
+[node name="Slot" type="Node3D" unique_id=298422093]
+script = ExtResource("1_hdrrs")
+
+[node name="Spawner" type="MultiplayerSpawner" parent="." unique_id=531452932]
+_spawnable_scenes = PackedStringArray("uid://ll0t0kbkiu7a")
+spawn_path = NodePath("..")

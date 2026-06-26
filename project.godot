@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 NetworkService="*uid://cc8xg0r2k8upa"
+SpawnHandler="*uid://d23b022tqslsw"
 
 [display]
 
@@ -75,9 +76,15 @@ detach_cursor={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194328,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
+spawn_test={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":49,"key_label":0,"unicode":49,"location":0,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
+3d_render/layer_12="Outline"
 3d_physics/layer_1="Terrain"
 3d_physics/layer_2="Players"
 3d_physics/layer_9="Activatables"
@@ -89,3 +96,14 @@ detach_cursor={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+
+[steam]
+
+initialization/app_data/app_type=0
+initialization/app_data/app_id=480
+initialization/app_data/demo_id=0
+initialization/app_data/playtest_id=0
+initialization/app_data/tool_id=0
+multiplayer_peer/max_channels=4
+initialization/processes/initialize_on_startup=false
+initialization/processes/embed_callbacks=false

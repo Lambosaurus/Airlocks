@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d2303kq8gohf0" path="res://tools/spawner.gd" id="1_ry7pt"]
 
-[node name="Spawner" type="Node3D" unique_id=1154990388]
+[node name="Spawner" type="MultiplayerSpawner" unique_id=1897963606]
 script = ExtResource("1_ry7pt")
 
 [node name="Timer" type="Timer" parent="." unique_id=1532190583]

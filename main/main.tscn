@@ -2,9 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ctner1u3utn0d" path="res://main/main.gd" id="1_53q0u"]
 [ext_resource type="Shader" uid="uid://c0hrf2j338nft" path="res://shaders/starfield.gdshader" id="2_pjrb6"]
-[ext_resource type="PackedScene" uid="uid://ll0t0kbkiu7a" path="res://items/Ball.tscn" id="3_xwkvk"]
-[ext_resource type="PackedScene" uid="uid://ca8l4lyp3tnb7" path="res://tools/spawner.tscn" id="4_3wy1v"]
-[ext_resource type="ArrayMesh" uid="uid://clicfsbxae8sb" path="res://items/statics/box_Cube.res" id="4_c651c"]
+[ext_resource type="ArrayMesh" uid="uid://hdddytvasaq0" path="res://items/statics/box_Cube.res" id="4_c651c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cppmk"]
 shader = ExtResource("2_pjrb6")
@@ -57,8 +55,8 @@ mesh = SubResource("PlaneMesh_l657f")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D" unique_id=1812322420]
 shape = SubResource("ConcavePolygonShape3D_4hihk")
 
-[node name="PlayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1450176998]
-_spawnable_scenes = PackedStringArray("uid://d10dh4m7kg8qu")
+[node name="EntitySpawner" type="MultiplayerSpawner" parent="." unique_id=1450176998]
+_spawnable_scenes = PackedStringArray("uid://d10dh4m7kg8qu", "uid://ll0t0kbkiu7a")
 spawn_path = NodePath("../EntitySpace")
 
 [node name="EntitySpace" type="Node3D" parent="." unique_id=157444669]
@@ -92,9 +90,5 @@ mesh = ExtResource("4_c651c")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EntitySpace/Box/StaticBody3D" unique_id=623722709]
 shape = SubResource("ConcavePolygonShape3D_3wy1v")
 
-[node name="BallSpawner" parent="EntitySpace" unique_id=1154990388 node_paths=PackedStringArray("target") instance=ExtResource("4_3wy1v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.2198677)
-scene = ExtResource("3_xwkvk")
-target = NodePath(".")
-frequency = 1.0
-amount = 5
+[node name="BallSpawn" type="Node3D" parent="EntitySpace" unique_id=949913292]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.0339632, -5.050375)

@@ -11,6 +11,18 @@ signal player_disconnected(id: int)
 func _ready():
 	multiplayer.peer_connected.connect(_on_player_connected)
 	multiplayer.peer_disconnected.connect(_on_player_disconnected)
+	initialize_steam()
+	
+func initialize_steam() -> void:
+	var initialize_response: Dictionary = Steam.steamInitEx()
+	print("Did Steam initialize?: %s" % initialize_response)
+
+	if initialize_response['status'] > Steam.STEAM_API_INIT_RESULT_OK:
+		print("Failed to initialize Steam, shutting down: %s" % initialize_response)
+		# Show some kind of prompt so the game doesn't suddently stop working
+		#show_warning_prompt()
+
+		get_tree().quit()
 
 func start_server():
 	var peer = ENetMultiplayerPeer.new()
