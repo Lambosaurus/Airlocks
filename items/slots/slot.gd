@@ -1,33 +1,36 @@
 class_name Slot
 extends Node3D
 
-@export var assigned: PhysicsBody3D
+var assigned: Item
+@export_node_path("Item") var _assigned_path: Variant:
+	set(value):
+		assigned = get_node(value) if value else null
+	get():
+		if not assigned: return
+		return assigned.get_path()
+@onready var hold_point := $HoldPoint
 
-# TODO: Auto handle spawnable items/scenes
-@onready var spawner = $Spawner
+# Spawn functions are responsibility of server, so must be assigned as authority
+func _enter_tree():
+	set_multiplayer_authority(1)
 
-@rpc
-func add_to_slot(body: PhysicsBody3D):
-	#if not multiplayer.is_server(): return
+func add_to_slot(body: Item):
+	if not multiplayer.is_server(): return
 	if assigned: return
 	
-	assigned = body.duplicate()
-	body.queue_free()
-	add_child(assigned, true)
-	assigned.freeze = true
-	assigned.position = Vector3.ZERO
+	body.mesh.set_layer_mask_value(12, false)
+	assigned = SpawnHandler.move_to_space(body, hold_point.global_position, hold_point)
+	assigned.held = true
 	
 	return assigned
 	
-@rpc
 func take_from_slot():
-	#if not multiplayer.is_server(): return
+	if not multiplayer.is_server(): return
 	if not assigned: return
 	
-	var removed = assigned.duplicate()
-	assigned.queue_free()
-	assigned = null
-	removed.freeze = false
+	assigned.mesh.set_layer_mask_value(12, false)
+	var removed = SpawnHandler.move_to_space(assigned, hold_point.global_position)
+	removed.held = false
 	
 	return removed
 	

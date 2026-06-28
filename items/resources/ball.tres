@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemType" format=3 uid="uid://hslggh3j1fh5"]
+
+[ext_resource type="Script" uid="uid://ct72gq2jagynw" path="res://items/types/item_type.gd" id="1_dv7n6"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_pxpuq"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xwkvk"]
+bounce = 0.8
+
+[resource]
+script = ExtResource("1_dv7n6")
+mesh = SubResource("SphereMesh_pxpuq")
+physics_material = SubResource("PhysicsMaterial_xwkvk")
+metadata/_custom_type_script = "uid://ct72gq2jagynw"

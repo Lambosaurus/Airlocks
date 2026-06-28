@@ -37,6 +37,19 @@ func join_server(ip_addr: String):
 func server_log(text: String):
 	print(text)
 	
+@rpc("call_local")
+func _handle_server_action(self_path: NodePath, method: StringName, ...args: Array[Variant]):	
+	args = args.map(func(a): return get_node(a) if a is NodePath else a)
+	var self_node = get_node(self_path)
+	var callable = Callable(self_node, method)
+	callable.callv(args)
+	
+# RPC to server, parsing nodes as their absolute path
+# self_arg is the scope the given method is called in
+func server_action(self_arg: Node, callable: Callable, ...args: Array[Variant]):
+	args = args.map(func(a): return a.get_path() if a is Node else a)
+	_handle_server_action.rpc_id.callv([1, self_arg.get_path(), callable.get_method()] + args)
+	
 func _on_player_connected(id: int):
 	if multiplayer.is_server():
 		server_log("Player" + str(id) + " connected")

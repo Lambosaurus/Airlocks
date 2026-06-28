@@ -15,11 +15,8 @@ func _process(_delta):
 	if Input.is_key_pressed(KEY_ESCAPE):
 		get_tree().quit()
 	
-	if Input.is_action_just_pressed("spawn_test"):
-		var scene = preload("res://items/Ball.tscn")
-		var ball = scene.instantiate()
-		$EntitySpace.add_child(ball, true)
-		ball.global_position = $EntitySpace/BallSpawn.global_position
+	if Input.is_action_pressed("spawn_test"):
+		$EntitySpace/BallSpawner.spawn_items()
 		
 		
 func add_player(id: int): 
