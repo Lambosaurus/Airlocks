@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://dplsum5wo58x3"]
+
+[ext_resource type="Script" uid="uid://b3xelqvmh5qqk" path="res://items/scenes/torch_item.gd" id="1_qdcfb"]
+[ext_resource type="Resource" uid="uid://ck8xvv14t2c5u" path="res://items/resources/torch.tres" id="2_8yb67"]
+[ext_resource type="ArrayMesh" uid="uid://by8i4uhvelq1" path="res://items/meshes/torch_Cylinder.res" id="3_f1bb0"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_63j8y"]
+points = PackedVector3Array(0.17855325, 0.50714284, 0.12137405, -0.20710228, 0.4785043, -0.04996083, -0.20710228, 0.4785043, 0.049920306, 0.10709952, -0.40714282, -0.04996083, 0.09278444, 0.50714284, -0.19282776, -0.04996083, -0.40714282, 0.10709952, -0.04996083, -0.40714282, -0.10714004, -0.04996083, 0.50714284, 0.20710231, -0.12141457, 0.50714284, -0.17855322, 0.049920306, -0.40714282, 0.10709952, 0.20710231, 0.4785043, -0.04996083, -0.10714004, -0.40714282, -0.04996083, 0.09278444, 0.4785043, 0.19282779, 0.10709952, -0.40714282, 0.049920306, -0.17855322, 0.50714284, 0.12137405, -0.10714004, -0.40714282, 0.049920306, 0.049920306, -0.40714282, -0.10714004, -0.04996083, 0.4785043, -0.20710228, 0.17855325, 0.4785043, -0.12141457, 0.20710231, 0.50714284, 0.049920306, -0.12141457, 0.4785043, 0.17855325, -0.17855322, 0.4785043, -0.12141457, 0.049920306, 0.4785043, 0.20710231, 0.049920306, 0.4785043, -0.20710228, 0.12137405, 0.4785043, 0.17855325, 0.12137405, 0.4785043, -0.17855322, -0.20710228, 0.50714284, -0.04996083, -0.04996083, 0.4785043, 0.20710231, 0.20710231, 0.4785043, 0.049920306, 0.17855325, 0.50714284, -0.12141457, 0.17855325, 0.4785043, 0.12137405, -0.17855322, 0.4785043, 0.12137405)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qdcfb"]
+properties/0/path = NodePath("Light:visible")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:_item_type_path")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:held")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:activated")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath(".:position")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath(".:rotation")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+
+[node name="TorchItem" type="RigidBody3D" unique_id=1981594066]
+collision_layer = 256
+collision_mask = 259
+mass = 0.5
+script = ExtResource("1_qdcfb")
+item_type = ExtResource("2_8yb67")
+metadata/_custom_type_script = "uid://7yde2kyr0t8l"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=720647756]
+mesh = ExtResource("3_f1bb0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1390470797]
+shape = SubResource("ConvexPolygonShape3D_63j8y")
+
+[node name="Light" type="SpotLight3D" parent="." unique_id=2111717724]
+transform = Transform3D(0.9997019, 0.02437448, -0.0014031604, -0.0013755054, -0.0011514425, -0.9999984, -0.024376055, 0.99970216, -0.0011175573, 0.00047182362, 0.33625725, 0.00037578726)
+visible = false
+shadow_enabled = true
+spot_range = 30.0
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2076602302]
+replication_config = SubResource("SceneReplicationConfig_qdcfb")
+
+[node name="HoldPosition" type="Node3D" parent="." unique_id=1342607331]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.19375145, 0)
+
+[node name="Glow" type="OmniLight3D" parent="." unique_id=1926541022]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5804956, 0)
+visible = false
+omni_range = 0.2

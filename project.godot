@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 NetworkService="*uid://cc8xg0r2k8upa"
 SpawnHandler="*uid://d23b022tqslsw"
+EntityService="*uid://5vewg444o3t2"
 
 [display]
 

@@ -3,8 +3,12 @@
 [ext_resource type="Script" uid="uid://ctner1u3utn0d" path="res://main/main.gd" id="1_53q0u"]
 [ext_resource type="Shader" uid="uid://c0hrf2j338nft" path="res://shaders/starfield.gdshader" id="2_pjrb6"]
 [ext_resource type="PackedScene" uid="uid://ca8l4lyp3tnb7" path="res://tools/item_spawner.tscn" id="3_3wy1v"]
-[ext_resource type="ArrayMesh" uid="uid://hdddytvasaq0" path="res://items/statics/box_Cube.res" id="4_c651c"]
+[ext_resource type="PackedScene" uid="uid://nb1wy1e4tkji" path="res://tools/entity_spawner.tscn" id="3_4dugh"]
+[ext_resource type="ArrayMesh" uid="uid://hdddytvasaq0" path="res://items/meshes/box_Cube.res" id="4_c651c"]
 [ext_resource type="Resource" uid="uid://hslggh3j1fh5" path="res://items/resources/ball.tres" id="4_kfbq2"]
+[ext_resource type="PackedScene" uid="uid://dplsum5wo58x3" path="res://items/scenes/torch_item.tscn" id="6_kfbq2"]
+[ext_resource type="Resource" uid="uid://ck8xvv14t2c5u" path="res://items/resources/torch.tres" id="7_67ri8"]
+[ext_resource type="PackedScene" uid="uid://6t442mvjoahj" path="res://items/scenes/item.tscn" id="7_grrlh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cppmk"]
 shader = ExtResource("2_pjrb6")
@@ -57,9 +61,13 @@ mesh = SubResource("PlaneMesh_l657f")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D" unique_id=1812322420]
 shape = SubResource("ConcavePolygonShape3D_4hihk")
 
-[node name="EntitySpawner" type="MultiplayerSpawner" parent="." unique_id=1450176998]
-_spawnable_scenes = PackedStringArray("uid://d10dh4m7kg8qu", "uid://6t442mvjoahj")
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1450176998]
+_spawnable_scenes = PackedStringArray("uid://d10dh4m7kg8qu")
 spawn_path = NodePath("../EntitySpace")
+
+[node name="Spawner" parent="." unique_id=1303491388 instance=ExtResource("3_4dugh")]
+spawn_path = NodePath("../EntitySpace")
+preload_paths = Array[String](["res://items/scenes"])
 
 [node name="EntitySpace" type="Node3D" parent="." unique_id=157444669]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1303172, 0)
@@ -92,8 +100,18 @@ mesh = ExtResource("4_c651c")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EntitySpace/Box/StaticBody3D" unique_id=623722709]
 shape = SubResource("ConcavePolygonShape3D_3wy1v")
 
-[node name="BallSpawner" parent="EntitySpace" unique_id=1509615509 instance=ExtResource("3_3wy1v")]
+[node name="BallSpawner" parent="EntitySpace" unique_id=1509615509 node_paths=PackedStringArray("target") instance=ExtResource("3_3wy1v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.7709801, -5.1867437)
 item_type = ExtResource("4_kfbq2")
+target = NodePath(".")
 amount = 10
 variability = 0.2
+item_scene = ExtResource("7_grrlh")
+
+[node name="TorchSpawner" parent="EntitySpace" unique_id=341574534 node_paths=PackedStringArray("target") instance=ExtResource("3_3wy1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.7709801, -5.1867437)
+item_type = ExtResource("7_67ri8")
+target = NodePath(".")
+amount = 5
+variability = 0.2
+item_scene = ExtResource("6_kfbq2")

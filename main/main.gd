@@ -15,8 +15,11 @@ func _process(_delta):
 	if Input.is_key_pressed(KEY_ESCAPE):
 		get_tree().quit()
 	
-	if Input.is_action_pressed("spawn_test"):
+	if Input.is_key_pressed(KEY_1):
 		$EntitySpace/BallSpawner.spawn_items()
+	if Input.is_key_pressed(KEY_2):
+		$EntitySpace/TorchSpawner.spawn_items()
+		
 		
 		
 func add_player(id: int): 

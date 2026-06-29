@@ -4,20 +4,22 @@ extends Resource
 @export_category("Physical 3D")
 @export var mesh: Mesh
 @export var physics_material: PhysicsMaterial
+@export var mass: float
+
 @export_group("Shape")
 @export var shape: Shape3D
 
-@export_category("Activatable")
-@export var actions: Dictionary[String, Callable]
-
 func initialize(item: Item):
-	var mesh_instance = build_mesh_instance()
-	var collision_shape = build_collision_shape()
+	if mesh:
+		var mesh_instance = build_mesh_instance()
+		item.mesh = mesh_instance
+		item.add_child(mesh_instance)
 	
-	item.mesh = mesh_instance
-	item.add_child(mesh_instance)
-	item.add_child(collision_shape)
-	item.physics_material_override = physics_material
+		var collision_shape = build_collision_shape()
+		item.add_child(collision_shape)
+		
+	if physics_material: item.physics_material_override = physics_material
+	if mass: item.mass = mass
 	
 	return item
 	
@@ -42,11 +44,3 @@ func build_mesh_instance():
 	
 	return item_mesh
 	
-func activate(action: String):
-	if not can_activate(action): return
-	
-	# Do nothing for now, future we can fill out actions
-	return actions[action]
-	
-func can_activate(action: String):
-	return actions.has(action)

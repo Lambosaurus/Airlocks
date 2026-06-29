@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://6t442mvjoahj"]
 
-[ext_resource type="Script" uid="uid://7yde2kyr0t8l" path="res://items/item.gd" id="1_pxpuq"]
+[ext_resource type="Script" uid="uid://7yde2kyr0t8l" path="res://items/scenes/item.gd" id="1_pxpuq"]
 [ext_resource type="Resource" uid="uid://hslggh3j1fh5" path="res://items/resources/ball.tres" id="2_buahv"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_pxpuq"]
@@ -13,6 +13,12 @@ properties/1/replication_mode = 1
 properties/2/path = NodePath(".:_item_type_path")
 properties/2/spawn = true
 properties/2/replication_mode = 2
+properties/3/path = NodePath(".:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:activated")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
 [node name="Item" type="RigidBody3D" unique_id=1245459316]
 collision_layer = 256
@@ -21,5 +27,5 @@ mass = 0.1
 script = ExtResource("1_pxpuq")
 item_type = ExtResource("2_buahv")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=388805016]
+[node name="Synchronizer" type="MultiplayerSynchronizer" parent="." unique_id=388805016]
 replication_config = SubResource("SceneReplicationConfig_pxpuq")

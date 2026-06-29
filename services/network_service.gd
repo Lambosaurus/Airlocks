@@ -20,9 +20,7 @@ func initialize_steam() -> void:
 	if initialize_response['status'] > Steam.STEAM_API_INIT_RESULT_OK:
 		print("Failed to initialize Steam, shutting down: %s" % initialize_response)
 		# Show some kind of prompt so the game doesn't suddently stop working
-		#show_warning_prompt()
 
-		get_tree().quit()
 
 func start_server():
 	var peer = ENetMultiplayerPeer.new()
@@ -43,7 +41,7 @@ func _handle_server_action(self_path: NodePath, method: StringName, ...args: Arr
 	var self_node = get_node(self_path)
 	var callable = Callable(self_node, method)
 	callable.callv(args)
-	
+
 # RPC to server, parsing nodes as their absolute path
 # self_arg is the scope the given method is called in
 func server_action(self_arg: Node, callable: Callable, ...args: Array[Variant]):

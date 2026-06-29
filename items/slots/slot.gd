@@ -20,6 +20,7 @@ func add_to_slot(body: Item):
 	
 	body.mesh.set_layer_mask_value(12, false)
 	assigned = SpawnHandler.move_to_space(body, hold_point.global_position, hold_point)
+	assigned.rotation = Vector3.ZERO
 	assigned.held = true
 	
 	return assigned

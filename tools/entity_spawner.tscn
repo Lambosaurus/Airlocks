@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://nb1wy1e4tkji"]
+
+[ext_resource type="Script" uid="uid://3rps0hyf8yr0" path="res://tools/entity_spawner.gd" id="1_yekrk"]
+
+[node name="EntitySpawner" type="MultiplayerSpawner" unique_id=1303491388]
+script = ExtResource("1_yekrk")

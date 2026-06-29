@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemType" format=3 uid="uid://hslggh3j1fh5"]
 
-[ext_resource type="Script" uid="uid://ct72gq2jagynw" path="res://items/types/item_type.gd" id="1_dv7n6"]
+[ext_resource type="Script" uid="uid://ct72gq2jagynw" path="res://items/item_type.gd" id="1_dv7n6"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_pxpuq"]
 radius = 0.1
@@ -13,4 +13,5 @@ bounce = 0.8
 script = ExtResource("1_dv7n6")
 mesh = SubResource("SphereMesh_pxpuq")
 physics_material = SubResource("PhysicsMaterial_xwkvk")
+mass = 0.1
 metadata/_custom_type_script = "uid://ct72gq2jagynw"

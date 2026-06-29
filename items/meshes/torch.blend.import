@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://hhep23wywp4c"
-path="res://.godot/imported/box.blend-14e14a5541f39d7b3b2d7360bb8cd00f.scn"
+uid="uid://bgrplepkr26kl"
+path="res://.godot/imported/torch.blend-7eb383638a76b6daef29c369fe4a6048.scn"
 
 [deps]
 
-source_file="res://items/statics/box.blend"
-dest_files=["res://.godot/imported/box.blend-14e14a5541f39d7b3b2d7360bb8cd00f.scn"]
+source_file="res://items/meshes/torch.blend"
+dest_files=["res://.godot/imported/torch.blend-7eb383638a76b6daef29c369fe4a6048.scn"]
 
 [params]
 
@@ -41,22 +41,14 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "meshes": {
-"box_Cube": {
+"torch_Cylinder": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://items/statics/box_Cube.res",
-"save_to_file/path": "uid://hdddytvasaq0"
-}
-},
-"nodes": {
-"PATH:Camera": {
-"import/skip_import": true
-},
-"PATH:Light": {
-"import/skip_import": true
+"save_to_file/fallback_path": "res://items/meshes/torch_Cylinder.res",
+"save_to_file/path": "uid://by8i4uhvelq1"
 }
 }
 }
